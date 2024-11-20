@@ -1,13 +1,12 @@
-export class Supplier{
-
+export class Pacient {
     private id: number;
     private name: string;
-    private phoneNumber: number;
+    private specie: string;
 
-    constructor(name:string, phoneNumber:number){
+    constructor(name:string, specie:string){
         this.id = Date.now();
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.specie = specie;
     }
 
     getId():number{
@@ -18,13 +17,13 @@ export class Supplier{
         return this.name;
     }
 
-    getPhoneNumber():number{
-        return this.phoneNumber;
+    getSpecie():string{
+        return this.specie;
     }
 
 
-    setPhoneNumber(phoneNumber:number){
-        this.phoneNumber = phoneNumber;
+    setSpecie(specie:string) {
+        this.specie = specie;
     }
 
     setName(name:string){

@@ -1,13 +1,26 @@
-export class Supplier{
-
+export class Client {
+    
     private id: number;
     private name: string;
+    private counterVisits: number;
     private phoneNumber: number;
 
-    constructor(name:string, phoneNumber:number){
+    constructor(name:string, counterVisits:number, phoneNumber:number){
         this.id = Date.now();
         this.name = name;
+        this.counterVisits = counterVisits;
         this.phoneNumber = phoneNumber;
+    }
+
+    getCounterVisits():number{
+        return this.counterVisits;
+    }
+
+    isVip(){
+        if(this.counterVisits >= 5){
+             return true;
+        }
+        return false;
     }
 
     getId():number{
@@ -22,9 +35,12 @@ export class Supplier{
         return this.phoneNumber;
     }
 
-
     setPhoneNumber(phoneNumber:number){
         this.phoneNumber = phoneNumber;
+    }
+
+    setCounterVisits(visits:number){
+        this.counterVisits = visits;
     }
 
     setName(name:string){
@@ -34,5 +50,4 @@ export class Supplier{
     setId(id:number){
         this.id = id;
     }
-
 }
