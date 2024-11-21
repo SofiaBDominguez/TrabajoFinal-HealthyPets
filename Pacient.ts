@@ -1,14 +1,16 @@
 export class Pacient {
+    //declaramos los atributos del objeto
     private id: number;
     private idOwner: number;
     private name: string;
     private specie: string;
 
     constructor(name: string, specie: string, idOwner: number) {
+        //Manejamos el id con la funcion Date.now() para asegurarnos que no se repitan
         this.id = Date.now();
         this.name = name;
         this.idOwner = idOwner;
-
+        //Nos aseguramos de que el atributo especie sea "perro" o "gato" y sino le seteamos "otro"
         if (specie != "perro" && specie != "gato") {
             this.specie = "otro";
         } else {
