@@ -1,37 +1,36 @@
-export class Supplier{
+export class Supplier {
 
     private id: number;
     private name: string;
     private phoneNumber: number;
 
-    constructor(name:string, phoneNumber:number){
+    constructor(name: string, phoneNumber: number) {
         this.id = Date.now();
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
 
-    getId():number{
+    getId(): number {
         return this.id;
     }
 
-    getName():string{
+    getName(): string {
         return this.name;
     }
 
-    getPhoneNumber():number{
+    getPhoneNumber(): number {
         return this.phoneNumber;
     }
 
-
-    setPhoneNumber(phoneNumber:number){
+    setPhoneNumber(phoneNumber: number) {
         this.phoneNumber = phoneNumber;
     }
 
-    setName(name:string){
+    setName(name: string) {
         this.name = name;
     }
 
-    setId(id:number){
+    setId(id: number) {
         this.id = id;
     }
 
