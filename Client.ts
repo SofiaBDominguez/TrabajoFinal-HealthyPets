@@ -12,6 +12,11 @@ export class Client {
         this.phoneNumber = phoneNumber;
     }
 
+    registrarVisita(): void {
+        this.counterVisits++;
+        console.log(`Visitas actualizadas para ${this.name}: ${this.counterVisits}`);
+    }
+
     getCounterVisits(): number {
         return this.counterVisits;
     }

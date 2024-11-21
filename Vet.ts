@@ -20,9 +20,22 @@ export class Vet {
         this.pacients = [];
     }
 
+    getClientById(id: number): Client | undefined {
+        return this.clients.find(client => client.getId() === id);
+    }
+
     addClient(name: string, counterVisits: number, phoneNumber: number) {
         let client: Client = new Client(name, counterVisits, phoneNumber);
         this.clients.push(client);
+    }
+
+    addVisit(id: number): void {
+        const cliente = this.getClientById(id);
+        if (cliente) {
+            cliente.registrarVisita();
+        } else {
+            console.log("Cliente no encontrado.");
+        }
     }
 
     removeClient(id: number) {
