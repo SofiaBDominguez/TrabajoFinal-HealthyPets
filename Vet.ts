@@ -3,6 +3,7 @@ import { Pacient } from "./Pacient";
 import { Supplier } from "./Supplier";
 
 export class Vet {
+   
     //declaramos los atributos del objeto
     private id: number;
     private name: string;
@@ -21,6 +22,9 @@ export class Vet {
         this.suppliers = [];
         this.pacients = [];
     }
+    getClientByNameAndNumber(name : string, phoneNumber : number ): Client | undefined {
+        return this.clients.find(client => client.getName() === name && client.getPhoneNumber() === phoneNumber)  ;
+    }
     /**
      * Buscamos el cliente segun su id
      * @param id 
@@ -35,8 +39,8 @@ export class Vet {
      * @param counterVisits number
      * @param phoneNumber number
      */
-    addClient(name: string, counterVisits: number, phoneNumber: number) {
-        let client: Client = new Client(name, counterVisits, phoneNumber);
+    addClient(name: string, phoneNumber: number) {
+        let client: Client = new Client(name, phoneNumber);
         this.clients.push(client);
     }
     /**
@@ -160,6 +164,26 @@ export class Vet {
 
     setAdress(adress: string) {
         this.adress = adress;
+    }
+
+     /**
+     * Representamos a la veterinaria como una cadena de texto
+     * @returns string
+     */
+     toString() : string{
+        //Construimos una cadena de texto que incluye toda la información de la veterinaria
+        const informacion = `Veterinaria: {\n` +
+        `  ID: ${this.id},\n` +
+        `  Nombre: ${this.name},\n` +
+        `  Direccion: ${this.adress}, \n` +
+        `  Clientes: ${this.clients.toString()}, \n ` +
+        `  Pacientes: ${this.pacients.toString()}, \n ` +
+        `  Proveedores: ${this.suppliers.toString()}, \n ` +
+
+        `}`;
+
+        //Retorna la cadena construida
+        return informacion; 
     }
 
 }

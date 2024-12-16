@@ -35,4 +35,21 @@ export class Supplier {
         this.id = id;
     }
 
+    /**
+     * Representamos al proveedor como una cadena de texto
+     * @returns string
+     */
+    toString() : string{
+
+        //Construimos una cadena de texto que incluye toda la información del proveedor
+        const informacion = `Proveedor: {\n` +
+        `  ID: ${this.id},\n` +
+        `  Nombre: ${this.name},\n` +
+        `  Telefono: ${this.phoneNumber},\n` +
+        `}`;
+
+        //Retorna la cadena construida
+        return informacion; 
+    }
+
 }

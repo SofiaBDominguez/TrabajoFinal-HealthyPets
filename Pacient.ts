@@ -10,9 +10,9 @@ export class Pacient {
         this.id = Date.now();
         this.name = name;
         this.idOwner = idOwner;
-        //Nos aseguramos de que el atributo especie sea "perro" o "gato" y sino le seteamos "otro"
+        //Nos aseguramos de que el atributo especie sea "perro" o "gato" y sino le seteamos "exotico"
         if (specie != "perro" && specie != "gato") {
-            this.specie = "otro";
+            this.specie = "exotico";
         } else {
             this.specie = specie;
         }
@@ -50,4 +50,21 @@ export class Pacient {
         this.idOwner = id;
     }
 
+     /**
+     * Representamos al paciente como una cadena de texto
+     * @returns string
+     */
+     toString() : string{
+
+        //Construimos una cadena de texto que incluye toda la información del paciente
+        const informacion = `Paciente: {\n` +
+        `  ID: ${this.id},\n` +
+        `  ID Dueño: ${this.idOwner},\n` +
+        `  Nombre: ${this.name},\n` +
+        `  Especie: ${this.specie},\n` +
+        `}`;
+
+        //Retorna la cadena construida
+        return informacion; 
+    }
 }
