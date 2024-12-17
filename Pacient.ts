@@ -57,7 +57,7 @@ export class Pacient {
      toString() : string{
 
         //Construimos una cadena de texto que incluye toda la información del paciente
-        const informacion = `Paciente: {\n` +
+        const informacion = `\n Paciente: {\n` +
         `  ID: ${this.id},\n` +
         `  ID Dueño: ${this.idOwner},\n` +
         `  Nombre: ${this.name},\n` +

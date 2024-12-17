@@ -78,7 +78,7 @@ export class Client {
         }
 
         //Construimos una cadena de texto que incluye toda la información del cliente
-        const informacion = `Cliente: {\n` +
+        const informacion = `\n Cliente: {\n` +
         `  ID: ${this.id},\n` +
         `  Nombre: ${this.name},\n` +
         `  Teléfono: ${this.phoneNumber},\n` +

@@ -142,6 +142,10 @@ export class Vet {
         });
     }
 
+    getClients() {
+        return this.clients
+      }
+
     getId(): number {
         return this.id;
     }
@@ -172,11 +176,11 @@ export class Vet {
      */
      toString() : string{
         //Construimos una cadena de texto que incluye toda la información de la veterinaria
-        const informacion = `Veterinaria: {\n` +
+        const informacion = `\n Veterinaria: {\n` +
         `  ID: ${this.id},\n` +
         `  Nombre: ${this.name},\n` +
         `  Direccion: ${this.adress}, \n` +
-        `  Clientes: ${this.clients.toString()}, \n ` +
+        `  Clientes:\n ${this.clients.toString()}, \n ` +
         `  Pacientes: ${this.pacients.toString()}, \n ` +
         `  Proveedores: ${this.suppliers.toString()}, \n ` +
 

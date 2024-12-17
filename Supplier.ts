@@ -42,7 +42,7 @@ export class Supplier {
     toString() : string{
 
         //Construimos una cadena de texto que incluye toda la información del proveedor
-        const informacion = `Proveedor: {\n` +
+        const informacion = `\n Proveedor: {\n` +
         `  ID: ${this.id},\n` +
         `  Nombre: ${this.name},\n` +
         `  Telefono: ${this.phoneNumber},\n` +
