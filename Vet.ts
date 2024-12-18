@@ -25,6 +25,9 @@ export class Vet {
     this.pacients = [];
   }
 
+  /**
+   * Metodo que da inicio al bucle de la Vete
+   */
   initVet(): void {
     let flag = true;
     while (flag) {
@@ -34,6 +37,7 @@ export class Vet {
       console.log("3. Manejar proveedores");
 
       const option = rls.questionInt("Seleccione una opcion: ");
+
       switch (option) {
         case 1:
           this.handleClients();
@@ -54,11 +58,13 @@ export class Vet {
           break;
         default:
           console.log("Error, ingrese una opcion correcta: ");
-
       }
     }
   }
-  // ABM DE PROVEDORES
+
+  /**
+   * Muestra las opciones (ABM) de los Proveedores
+   */
   handleSuppliers(): void {
     let flag = true;
     while (flag) {
@@ -126,29 +132,9 @@ export class Vet {
     }
   }
 
-  selectSupplier(): Supplier {
-    console.log("\n Proveedores disponilbes");
-    this.suppliers.forEach((supplier, index) => {
-      console.log("------------------------------------------------");
-      console.log(`${index}. ${supplier.getName()}`);
-    });
-    console.log("------------------------------------------------");
-
-    let indexSupplier = rls.questionInt("Seleccione un Proveedor: ");
-    while (indexSupplier < 0 || indexSupplier >= this.suppliers.length) {
-      console.log("Error: Ingrese una opcion valida");
-      indexSupplier = rls.questionInt("Seleccione un Proveedor: ");
-    }
-    return this.suppliers[indexSupplier];
-  }
-  setCurrentSupplier(supplier: Supplier) {
-    this.currentSupplier = supplier;
-  }
-  getSuppliers(): Supplier[] {
-    return this.suppliers;
-  }
-
-  //ABM DE CLIENTES
+  /**
+  * Muestra las opciones (ABM) de los Clientes
+  */
   handleClients(): void {
     let flag = true;
     while (flag) {
@@ -227,41 +213,9 @@ export class Vet {
     }
   }
 
-  setCurrentClient(client: Client) {
-    this.currentClient = client;
-  }
-
-  selectClient(): Client {
-    console.log("\n Clientes disponilbes");
-    this.clients.forEach((client, index) => {
-      console.log("------------------------------------------------");
-      console.log(`${index}. ${client.getName()}`);
-    });
-    console.log("------------------------------------------------");
-
-    let indexClient = rls.questionInt("Seleccione un Cliente: ");
-    while (indexClient < 0 || indexClient >= this.clients.length) {
-      console.log("Error: Ingrese una opcion valida");
-      indexClient = rls.questionInt("Seleccione un Cliente: ");
-    }
-    return this.clients[indexClient];
-  }
-
-  getClientByNameAndNumber(
-    name: string,
-    phoneNumber: number
-  ): Client | undefined {
-    return this.clients.find(
-      (client) =>
-        client.getName() === name && client.getPhoneNumber() === phoneNumber
-    );
-  }
-
-  //ABM DE PACIENTES
-
-  getPacients(): Pacient[] {
-    return this.pacients;
-  }
+  /**
+  * Muestra las opciones (ABM) de los Pacientes
+  */
   handlePacients(): void {
     let flag = true;
     while (flag) {
@@ -272,8 +226,8 @@ export class Vet {
       let option = rls.questionInt("Seleccione una opcion: ");
       switch (option) {
         case 1:
-          let pacientName = "";
-          let pacientSpecie = null;
+          let pacientName = rls.question("Ingrese el nombre: ");
+          let pacientSpecie = rls.question("Ingrese la especie: ");
           while (pacientName === "" || pacientSpecie === null) {
             console.log("Error: Ingrese los datos nuevamente");
             pacientName = rls.question("Ingrese el nombre: ");
@@ -330,9 +284,51 @@ export class Vet {
     }
 
   }
-  setCurrentPacient(pacient: Pacient) {
-    this.currentPacient = pacient;
+
+  /**
+   * Muestra y solicita al usuario la eleccion de un cliente
+   * @returns Client
+   */
+  selectClient(): Client {
+    console.log("\n Clientes disponilbes");
+    this.clients.forEach((client, index) => {
+      console.log("------------------------------------------------");
+      console.log(`${index}. ${client.getName()}`);
+    });
+    console.log("------------------------------------------------");
+
+    let indexClient = rls.questionInt("Seleccione un Cliente: ");
+    while (indexClient < 0 || indexClient >= this.clients.length) {
+      console.log("Error: Ingrese una opcion valida");
+      indexClient = rls.questionInt("Seleccione un Cliente: ");
+    }
+    return this.clients[indexClient];
   }
+
+  /**
+ * Muestra y solicita al usuario la eleccion de un proveedor
+ * @returns Supplier
+ */
+  selectSupplier(): Supplier {
+    console.log("\n Proveedores disponilbes");
+    this.suppliers.forEach((supplier, index) => {
+      console.log("------------------------------------------------");
+      console.log(`${index}. ${supplier.getName()}`);
+    });
+    console.log("------------------------------------------------");
+
+    let indexSupplier = rls.questionInt("Seleccione un Proveedor: ");
+    while (indexSupplier < 0 || indexSupplier >= this.suppliers.length) {
+      console.log("Error: Ingrese una opcion valida");
+      indexSupplier = rls.questionInt("Seleccione un Proveedor: ");
+    }
+    return this.suppliers[indexSupplier];
+  }
+
+  /**
+ * Muestra y solicita al usuario que elija un Paciente
+ * @returns Pacient
+ */
   selectPacient(): Pacient {
     console.log("\n Pacientes disponilbes");
     this.pacients.forEach((pacient, index) => {
@@ -347,6 +343,38 @@ export class Vet {
       indexPacient = rls.questionInt("Seleccione un Paciente: ");
     }
     return this.pacients[indexPacient];
+  }
+
+  /**
+   * Busca y devuelve un cliente por nombre y numero de telefono
+   * @param name string
+   * @param phoneNumber number
+   * @returns Client | undefined
+   */
+  getClientByNameAndNumber(
+    name: string,
+    phoneNumber: number
+  ): Client | undefined {
+    return this.clients.find(
+      (client) =>
+        client.getName() === name && client.getPhoneNumber() === phoneNumber
+    );
+  }
+
+  getPacients(): Pacient[] {
+    return this.pacients;
+  }
+  getSuppliers(): Supplier[] {
+    return this.suppliers;
+  }
+  setCurrentSupplier(supplier: Supplier) {
+    this.currentSupplier = supplier;
+  }
+  setCurrentClient(client: Client) {
+    this.currentClient = client;
+  }
+  setCurrentPacient(pacient: Pacient) {
+    this.currentPacient = pacient;
   }
 
   /**
@@ -367,18 +395,7 @@ export class Vet {
     let client: Client = new Client(name, phoneNumber);
     this.clients.push(client);
   }
-  /**
-   * Agregamos una visita al cliente segun su id
-   * @param id
-   */
-  addVisit(id: number): void {
-    const cliente = this.getClientById(id);
-    if (cliente) {
-      cliente.addVisit();
-    } else {
-      console.log("Cliente no encontrado.");
-    }
-  }
+
   /**
    * Removemos un cliente segun su id
    * @param id

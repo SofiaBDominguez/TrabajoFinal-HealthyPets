@@ -20,13 +20,16 @@ function main(): void {
   let bandera = true;
 
   while (bandera) {
+    //Mostramos el menu
     console.log("\n Menu:");
     console.log("1. Crear nueva veterinaria");
     console.log("2. Seleccionar veterinarias");
     console.log("0. Salir");
 
+    //Solicitamos al usuario que elija
     const option = rls.questionInt("Seleccione una opcion: ");
 
+    //En base a la desicion del usuario tendremos cada caso
     switch (option) {
       case 0:
         console.log(
@@ -36,15 +39,17 @@ function main(): void {
         break;
 
       case 1:
-        //Creamos la veterinaria
+        //Le solicitamos al usuario los datos de la Vet
         const nameVet: string = rls.question(
           "Ingrese el nombre de la Veterinaria: "
         );
         const adressVet: string = rls.question(
           "Ingrese la direccion de la Veterinaria: "
         );
+        //Creamos la veterinaria
         const newVet: Vet = new Vet(nameVet, adressVet);
 
+        //Guardamos la Vet
         vets.push(newVet);
 
         console.log(`\n Veterinaria '${nameVet}' creada con éxito.`);
@@ -65,7 +70,7 @@ function main(): void {
           let indexVet = rls.questionInt("Seleccione una veterinaria: ");
 
           //Verificamos que ingrese correctamente la veterinaria
-          while (indexVet < 0  || indexVet >= vets.length) {
+          while (indexVet < 0 || indexVet >= vets.length) {
             console.log("Error: Elija una veterinaria valida");
             indexVet = rls.questionInt("Seleccione una veterinaria: ");
           }

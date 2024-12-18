@@ -8,8 +8,8 @@ export class Client {
     constructor(name: string, phoneNumber: number) {
         //Manejamos el id con la funcion Date.now() para asegurarnos que no se repitan
         this.id = Date.now();
-        this.name = name;
         this.counterVisits = 1;
+        this.name = name;
         this.phoneNumber = phoneNumber;
     }
     /**
@@ -67,10 +67,10 @@ export class Client {
      * Representamos al cliente como una cadena de texto
      * @returns string
      */
-    toString() : string{
-        let vipStatus : string; 
+    toString(): string {
+        let vipStatus: string;
 
-         //Verificamos si el cliente cumple con las condiciones para ser VIP
+        //Verificamos si el cliente cumple con las condiciones para ser VIP
         if (this.isVip()) {
             vipStatus = "VIP";
         } else {
@@ -79,14 +79,14 @@ export class Client {
 
         //Construimos una cadena de texto que incluye toda la información del cliente
         const informacion = `\n Cliente: {\n` +
-        `  ID: ${this.id},\n` +
-        `  Nombre: ${this.name},\n` +
-        `  Teléfono: ${this.phoneNumber},\n` +
-        `  Visitas: ${this.counterVisits},\n` +
-        `  Estado: ${vipStatus}\n` +
-        `}`;
+            `  ID: ${this.id},\n` +
+            `  Nombre: ${this.name},\n` +
+            `  Teléfono: ${this.phoneNumber},\n` +
+            `  Visitas: ${this.counterVisits},\n` +
+            `  Estado: ${vipStatus}\n` +
+            `}`;
 
         //Retorna la cadena construida
-        return informacion; 
+        return informacion;
     }
 }
