@@ -11,7 +11,7 @@ export class Pacient {
         this.name = name;
         this.idOwner = idOwner;
         //Nos aseguramos de que el atributo especie sea "perro" o "gato" y sino le seteamos "exotico"
-        if (specie != "perro" && specie != "gato") {
+        if (specie.toLowerCase() != "perro" && specie.toLowerCase() != "gato") {
             this.specie = "exotico";
         } else {
             this.specie = specie;

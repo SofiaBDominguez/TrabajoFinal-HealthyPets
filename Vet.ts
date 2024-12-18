@@ -39,6 +39,9 @@ export class Vet {
           this.handleClients();
           break;
         case 2:
+            if(this.clients.length > 0) {
+              this.handlePacients();
+            }else console.log("Error: Agregue un cliente primero antes de agregar un paciente \n");
           break;
         case 3:
           this.handleSuppliers();
@@ -51,6 +54,7 @@ export class Vet {
       }
     }
   }
+  
   handleSuppliers(): void {
     let flag = true;
     while (flag) {
@@ -70,7 +74,7 @@ export class Vet {
           }
           this.addSupplier(supplierName, supplierNumber);
           console.log(
-            `\n Proveedor '${supplierName}' agregado a la veterinaria '${this.getName()}\n'.`
+            `\n Proveedor '${supplierName}' agregado a la veterinaria '${this.getName()}' \n.`
           );
 
           console.log(this.getSuppliers().toString() + "\n");
@@ -117,6 +121,7 @@ export class Vet {
       }
     }
   }
+  
   selectSupplier(): Supplier {
     console.log("\n Proveedores disponilbes");
     this.suppliers.forEach((supplier, index) => {
@@ -125,7 +130,11 @@ export class Vet {
     });
     console.log("------------------------------------------------");
 
-    const indexSupplier = rls.questionInt("Seleccione un proveedor: ");
+    let indexSupplier = rls.questionInt("Seleccione un Proveedor: ");
+    while(indexSupplier < 0 || indexSupplier >= this.suppliers.length){
+        console.log("Error: Ingrese una opcion valida");
+        indexSupplier = rls.questionInt("Seleccione un Proveedor: ");
+    }
     return this.suppliers[indexSupplier];
   }
   setCurrentSupplier(supplier: Supplier) {
@@ -224,7 +233,11 @@ export class Vet {
     });
     console.log("------------------------------------------------");
 
-    const indexClient = rls.questionInt("Seleccione un cliente: ");
+    let indexClient = rls.questionInt("Seleccione un Cliente: ");
+    while(indexClient < 0 || indexClient >= this.clients.length){
+        console.log("Error: Ingrese una opcion valida");
+        indexClient = rls.questionInt("Seleccione un Cliente: ");
+    }
     return this.clients[indexClient];
   }
 
@@ -348,10 +361,11 @@ export class Vet {
    * Actualizamos la informacion de un paciente en especifico
    * @param newPacient
    */
-  updatePacient(newPacient: Pacient) {
+  updatePacient(name: string, specie: string, id: number) {
     this.pacients.forEach((pacient, index) => {
-      if (pacient.getId() === newPacient.getId()) {
-        this.pacients[index] = newPacient;
+      if (pacient.getId() === id) {
+        this.pacients[index].setName(name);
+        this.pacients[index].setSpecie(specie);
       }
     });
   }
@@ -403,4 +417,96 @@ export class Vet {
     //Retorna la cadena construida
     return informacion;
   }
+  
+
+    getPacients(): Pacient[] {
+        return this.pacients;
+    }
+    handlePacients(): void {
+        let flag = true;
+        while (flag) {
+          console.log("\n 0. Salir");
+          console.log("1. Agregar Paciente");
+          console.log("2. Eliminar Paciente");
+          console.log("3. Editar Paciente \n");
+          let option = rls.questionInt("Seleccione una opcion: ");
+          switch (option) {
+            case 1:
+              let pacientName = "";
+              let pacientSpecie = null;
+              while (pacientName === "" || pacientSpecie === null) {
+                console.log("Error: Ingrese los datos nuevamente");
+                pacientName = rls.question("Ingrese el nombre: ");
+                pacientSpecie = rls.question("Ingrese la especie: ");
+              }
+              this.setCurrentClient(this.selectClient());              
+              this.addPacient(pacientName,pacientSpecie, this.currentClient!.getId());
+              console.log(
+                `\n Paciente '${pacientName}' del cliente ${this.currentClient?.getName()} agregado a la veterinaria '${this.getName()}\n'.`
+              );
+    
+              console.log(this.getPacients().toString() + "\n");
+              break;
+            case 2:
+              if (this.pacients.length > 0) {
+                this.setCurrentPacient(this.selectPacient());
+                this.removePacient(this.currentPacient!.getId());
+                console.log(
+                  `\n Paciente '${this.currentPacient?.getName()}' eliminado con exito .`
+                );
+                this.currentPacient = undefined;
+              } else
+                console.log(
+                  "Error: Agregue un Paciente primero para poder eliminarlo."
+                );
+              break;
+            case 3:
+              if (this.pacients.length > 0) {
+                this.setCurrentPacient(this.selectPacient());
+                console.log("Paciente seleccionado: ", this.currentPacient, "\n");
+                console.log("Ingrese los nuevos datos del Paciente: ");
+                let name = rls.question("Ingrese el nombre: ");
+                let specie = rls.question("Ingrese la especie: ");
+                this.updatePacient(name, specie, this.currentPacient!.getId());
+                console.log(
+                  `\n Paciente '${this.currentPacient}' actualizado con exito .`
+                );
+                this.currentPacient = undefined;
+              } else
+                console.log(
+                    "Error: Agregue un Paciente primero para poder eliminarlo."
+                );
+              break;
+            case 0:
+              console.log(
+                `Gracias por visitar ${this.getName()} ¡Hasta la proxima!`
+              );
+              flag = false;
+              break;
+    
+            default:
+              console.log("Error, ingrese una opcion correcta: ");
+          }
+    }
+
+}
+    setCurrentPacient(pacient: Pacient) {
+        this.currentPacient = pacient;
+    }
+    selectPacient(): Pacient {
+    console.log("\n Pacientes disponilbes");
+    this.pacients.forEach((pacient, index) => {
+      console.log("------------------------------------------------");
+      console.log(`${index}. ${pacient.getName()}`);
+    });
+    console.log("------------------------------------------------");
+
+    let indexPacient = rls.questionInt("Seleccione un Paciente: ");
+    while(indexPacient < 0 || indexPacient >= this.pacients.length){
+        console.log("Error: Ingrese una opcion valida");
+        indexPacient = rls.questionInt("Seleccione un Paciente: ");
+    }
+    return this.pacients[indexPacient];
+    }
+
 }
