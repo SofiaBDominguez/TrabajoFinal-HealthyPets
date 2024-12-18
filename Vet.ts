@@ -39,15 +39,20 @@ export class Vet {
           this.handleClients();
           break;
         case 2:
+          // Aqui hacer el handlePacients()
           break;
         case 3:
           this.handleSuppliers();
           break;
         case 0:
+          console.log(
+            `Gracias por visitar ${this.getName()} ¡Hasta la proxima!`
+          );
           flag = false;
           break;
         default:
-          console.log("Invalid number");
+          console.log("Error, ingrese una opcion correcta: ");
+
       }
     }
   }
@@ -107,7 +112,7 @@ export class Vet {
           break;
         case 0:
           console.log(
-            `Gracias por visitar ${this.getName()} ¡Hasta la proxima!`
+            `Volviendo al menu principal de ${this.getName()}`
           );
           flag = false;
           break;
@@ -147,8 +152,8 @@ export class Vet {
       let option = rls.questionInt("Seleccione una opcion: ");
       switch (option) {
         case 1:
-          let clientName = "";
-          let clientNumber = null;
+          let clientName = rls.question("Ingrese el nombre: ");
+          let clientNumber = rls.questionInt("Ingrese el telefono: ");
           while (clientName === "" || clientNumber === null) {
             console.log("Error: Ingrese los datos nuevamente");
             clientName = rls.question("Ingrese el nombre: ");
@@ -202,7 +207,7 @@ export class Vet {
           break;
         case 0:
           console.log(
-            `Gracias por visitar ${this.getName()} ¡Hasta la proxima!`
+            `Volviendo al menu principal de ${this.getName()}`
           );
           flag = false;
           break;
